@@ -41,15 +41,14 @@ stock PLAYER_MOTION:GetPlayerMotion(playerid)
     GetPlayerKeys(playerid, keys, ud, lr);
 
     new
-        index = GetPlayerAnimationIndex(playerid),
-        bool:inMotion = (!!ud || !!lr)
+        index = GetPlayerAnimationIndex(playerid)
     ;
 
     if (index == 1180) {
-        return inMotion ? PLAYER_MOTION_WALK : PLAYER_MOTION_IDLE;
+        return (!!ud || !!lr) ? (keys & KEY_SPRINT) ? PLAYER_MOTION_RUN : PLAYER_MOTION_WALK : PLAYER_MOTION_IDLE;
     }
 
-    if (inMotion && (index == 1061 || index == 1062 || index == 1129 || index == 1133 || index == 1196 || index == 1231 || index == 1266)) {
+    if ((!!ud || !!lr) && (index == 1061 || index == 1062 || index == 1129 || index == 1133 || index == 1196 || index == 1231 || index == 1266)) {
         return (keys & KEY_SPRINT) ? PLAYER_MOTION_RUN : PLAYER_MOTION_WALK;
     }
 
@@ -82,10 +81,10 @@ public OnPlayerUpdate(playerid)
     }
 
     #if defined Motion_OnPlayerUpdate
-       	return Motion_OnPlayerUpdate(playerid);
-	#else
-	   	return 1;
-	#endif
+        return Motion_OnPlayerUpdate(playerid);
+    #else
+        return 1;
+    #endif
 }
 
 /**
