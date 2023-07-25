@@ -3,6 +3,13 @@
 
 main(){}
 
+public OnGameModeInit()
+{
+    UsePlayerPedAnims();
+
+    return 1;
+}
+
 public OnPlayerMotionStateChange(playerid, PLAYER_MOTION:newMotion, PLAYER_MOTION:oldMotion)
 {
     switch (newMotion) {
