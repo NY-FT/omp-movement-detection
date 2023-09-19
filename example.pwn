@@ -3,15 +3,14 @@
 
 main(){}
 
-public OnGameModeInit()
-{
+public OnGameModeInit() {
+    // important
     UsePlayerPedAnims();
 
     return 1;
 }
 
-public OnPlayerMotionStateChange(playerid, PLAYER_MOTION:newMotion, PLAYER_MOTION:oldMotion)
-{
+public OnPlayerMotionStateChange(playerid, PLAYER_MOTION:newMotion, PLAYER_MOTION:oldMotion) {
     switch (newMotion) {
         case PLAYER_MOTION_IDLE: {
             return ApplyAnimation(playerid, "PED", "IDLE_GANG1", 4.1, false, false, false, false, 1, SYNC_ALL);
