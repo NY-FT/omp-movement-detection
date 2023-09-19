@@ -85,9 +85,9 @@ public OnPlayerUpdate(playerid) {
  */
 
 #if defined _ALS_OnPlayerUpdate
-	#undef OnPlayerUpdate
+    #undef OnPlayerUpdate
 #else
-	#define _ALS_OnPlayerUpdate
+    #define _ALS_OnPlayerUpdate
 #endif
 
 #define OnPlayerUpdate \
