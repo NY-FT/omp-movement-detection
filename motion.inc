@@ -10,8 +10,7 @@
 #define PLAYER_MOTION: \
     __TAG(PLAYER_MOTION):
 
-enum PLAYER_MOTION:__PLAYER_MOTION
-{
+enum PLAYER_MOTION:__PLAYER_MOTION {
     PLAYER_MOTION_OTHER,
     PLAYER_MOTION_IDLE,
     PLAYER_MOTION_WALK,
@@ -30,9 +29,8 @@ forward OnPlayerMotionStateChange(playerid, PLAYER_MOTION:newMotion, PLAYER_MOTI
  * @API
  */
 
-stock PLAYER_MOTION:GetPlayerMotion(playerid) 
-{
-    static 
+stock PLAYER_MOTION:GetPlayerMotion(playerid) {
+    static
         KEY:keys, 
         KEY:ud, 
         KEY:lr
@@ -67,8 +65,7 @@ stock PLAYER_MOTION:GetPlayerMotion(playerid)
     return PLAYER_MOTION_OTHER;
 }
 
-public OnPlayerUpdate(playerid)
-{
+public OnPlayerUpdate(playerid) {
     static
         PLAYER_MOTION:newMotion,
         PLAYER_MOTION:oldMotion
@@ -80,11 +77,7 @@ public OnPlayerUpdate(playerid)
         }
     }
 
-    #if defined Motion_OnPlayerUpdate
-        return Motion_OnPlayerUpdate(playerid);
-    #else
-        return 1;
-    #endif
+    return Motion_OnPlayerUpdate(playerid);
 }
 
 /**
