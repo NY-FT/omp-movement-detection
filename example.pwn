@@ -1,5 +1,6 @@
 #include <open.mp>
-#include <motion>
+
+#include "movement"
 
 main(){}
 
@@ -10,15 +11,15 @@ public OnGameModeInit() {
     return 1;
 }
 
-public OnPlayerMotionStateChange(playerid, PLAYER_MOTION:newMotion, PLAYER_MOTION:oldMotion) {
-    switch (newMotion) {
-        case PLAYER_MOTION_IDLE: {
+public OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement) {
+    switch (newMovement) {
+        case PLAYER_MOVEMENT_IDLE: {
             return ApplyAnimation(playerid, "PED", "IDLE_GANG1", 4.1, false, false, false, false, 1, SYNC_ALL);
         }
-        case PLAYER_MOTION_WALK: {
+        case PLAYER_MOVEMENT_WALK: {
             return ApplyAnimation(playerid, "PED", "WALK_GANG1", 4.1, true, true, true, true, 1, SYNC_ALL);
         }
-        case PLAYER_MOTION_RUN: {
+        case PLAYER_MOVEMENT_RUN: {
             return ApplyAnimation(playerid, "PED", "RUN_GANG1", 4.1, true, true, true, true, 1, SYNC_ALL);
         }
     }
