@@ -1,7 +1,7 @@
-#if defined _INC_MOTION
+#if defined _INC_MOVEMENT
 	#endinput
 #endif
-#define _INC_MOTION
+#define _INC_MOVEMENT
 
 /**
  * @header
