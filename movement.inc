@@ -72,10 +72,10 @@ public OnPlayerUpdate(playerid) {
     ;
 
     if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_OTHER && newMovement != oldMovement) {
-        CallLocalFunction(!"OnPlayerMovementStateChange", !"iii",
-            playerid, 
-            _:newMovement, 
-            _:oldMovement
+        CallLocalFunction(
+            !"OnPlayerMovementStateChange",
+            !"iii",
+            playerid, _:newMovement, _:oldMovement
         );
         
         oldMovement = newMovement;
