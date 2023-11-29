@@ -32,8 +32,8 @@ forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYE
 stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
     static
         KEY:keys,
-        KEY:ud,
-        KEY:lr
+        ud,
+        lr
     ;
 
     GetPlayerKeys(playerid, keys, ud, lr);
@@ -72,7 +72,7 @@ public OnPlayerUpdate(playerid) {
     ;
 
     if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_OTHER && newMovement != oldMovement) {
-        CallLocalFunction(
+        CallRemoteFunction(
             !"OnPlayerMovementStateChange",
             !"iii",
             playerid, _:newMovement, _:oldMovement
