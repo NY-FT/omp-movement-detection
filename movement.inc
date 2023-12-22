@@ -31,23 +31,21 @@ forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYE
 
 stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
     static
-        KEY:keys,
-        ud,
-        lr
+        KEY:k, ud, lr
     ;
 
-    GetPlayerKeys(playerid, keys, ud, lr);
+    GetPlayerKeys(playerid, k, ud, lr);
 
     new
         index = GetPlayerAnimationIndex(playerid)
     ;
 
     if (index == 1180) {
-        return (!!ud || !!lr) ? (keys & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : PLAYER_MOVEMENT_WALK : PLAYER_MOVEMENT_IDLE;
+        return (!!ud || !!lr) ? (k & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : PLAYER_MOVEMENT_WALK : PLAYER_MOVEMENT_IDLE;
     }
 
     if ((!!ud || !!lr) && (index == 1061 || index == 1062 || index == 1129 || index == 1133 || index == 1196 || index == 1231 || index == 1266)) {
-        return (keys & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : PLAYER_MOVEMENT_WALK;
+        return (k & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : PLAYER_MOVEMENT_WALK;
     }
 
     if (index == 1195 || index == 1197 || index == 1198) {
