@@ -79,19 +79,21 @@ stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
 }
 
 public OnPlayerUpdate(playerid) {
-    static
-        PLAYER_MOVEMENT:newMovement,
-        PLAYER_MOVEMENT:oldMovement
-    ;
+    if (!IsPlayerInAnyVehicle(playerid) && GetPlayerSpecialAction(playerid) != SPECIAL_ACTION_USEJETPACK) {
+        static
+            PLAYER_MOVEMENT:newMovement,
+            PLAYER_MOVEMENT:oldMovement
+        ;
 
-    if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_UNKNOWN && newMovement != oldMovement) {
-        CallRemoteFunction(
-            !"OnPlayerMovementStateChange",
-            !"iii",
-            playerid, _:newMovement, _:oldMovement
-        );
-        
-        oldMovement = newMovement;
+        if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_UNKNOWN && newMovement != oldMovement) {
+            CallRemoteFunction(
+                !"OnPlayerMovementStateChange",
+                !"iii",
+                playerid, _:newMovement, _:oldMovement
+            );
+            
+            oldMovement = newMovement;
+        }
     }
 
     #if defined Movement_OnPlayerUpdate
