@@ -13,7 +13,7 @@ PLAYER_MOVEMENT_FALL
 # Events
 
 ```pwn
-forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement)
+forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement);
 ```
 
 # Natives
