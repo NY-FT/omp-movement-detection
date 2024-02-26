@@ -7,14 +7,17 @@ PLAYER_MOVEMENT_NORMAL
 PLAYER_MOVEMENT_WALK
 PLAYER_MOVEMENT_RUN
 PLAYER_MOVEMENT_JUMP
-PLAYER_MOVEMENT_FALL```
+PLAYER_MOVEMENT_FALL
+```
 
 # Events
 
 ```pwn
-forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement)```
+forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement)
+```
 
 # Natives
 
 ```pwn
-native PLAYER_MOVEMENT:GetPlayerMovement(playerid);```
+native PLAYER_MOVEMENT:GetPlayerMovement(playerid);
+```
