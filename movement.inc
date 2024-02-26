@@ -4,15 +4,16 @@
 #define _INC_MOVEMENT
 
 /**
- * @header
+ * # Header
  */
 
 #define PLAYER_MOVEMENT: \
     __TAG(PLAYER_MOVEMENT):
 
 enum PLAYER_MOVEMENT:__PLAYER_MOVEMENT {
-    PLAYER_MOVEMENT_OTHER,
+    PLAYER_MOVEMENT_UNKNOWN,
     PLAYER_MOVEMENT_IDLE,
+    PLAYER_MOVEMENT_NORMAL,
     PLAYER_MOVEMENT_WALK,
     PLAYER_MOVEMENT_RUN,
     PLAYER_MOVEMENT_JUMP,
@@ -23,13 +24,27 @@ static stock PLAYER_MOVEMENT:_@PLAYER_MOVEMENT() {
     return __PLAYER_MOVEMENT;
 }
 
+/**
+ * # Functions
+ */
+
+forward PLAYER_MOVEMENT:GetPlayerMovement(playerid);
+
+/**
+ * # Events
+ */
+
 forward OnPlayerMovementStateChange(playerid, PLAYER_MOVEMENT:newMovement, PLAYER_MOVEMENT:oldMovement);
 
 /**
- * @API
+ * # Setup
  */
 
 stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
+    if (!IsPlayerConnected(playerid)) {
+        return PLAYER_MOVEMENT_UNKNOWN;
+    }
+
     static
         KEY:k, ud, lr
     ;
@@ -45,7 +60,7 @@ stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
     }
 
     if ((!!ud || !!lr) && (index == 1061 || index == 1062 || index == 1129 || index == 1133 || index == 1196 || index == 1231 || index == 1266)) {
-        return (k & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : PLAYER_MOVEMENT_WALK;
+        return (k & KEY_SPRINT) ? PLAYER_MOVEMENT_RUN : (k & KEY_WALK) ? PLAYER_MOVEMENT_WALK : PLAYER_MOVEMENT_NORMAL;
     }
 
     if (index == 1195 || index == 1197 || index == 1198) {
@@ -60,7 +75,7 @@ stock PLAYER_MOVEMENT:GetPlayerMovement(playerid) {
         return PLAYER_MOVEMENT_IDLE;
     }
 
-    return PLAYER_MOVEMENT_OTHER;
+    return PLAYER_MOVEMENT_UNKNOWN;
 }
 
 public OnPlayerUpdate(playerid) {
@@ -69,7 +84,7 @@ public OnPlayerUpdate(playerid) {
         PLAYER_MOVEMENT:oldMovement
     ;
 
-    if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_OTHER && newMovement != oldMovement) {
+    if ((newMovement = GetPlayerMovement(playerid)) != PLAYER_MOVEMENT_UNKNOWN && newMovement != oldMovement) {
         CallRemoteFunction(
             !"OnPlayerMovementStateChange",
             !"iii",
@@ -87,7 +102,7 @@ public OnPlayerUpdate(playerid) {
 }
 
 /**
- * @ALS
+ * # ALS
  */
 
 #if defined _ALS_OnPlayerUpdate
